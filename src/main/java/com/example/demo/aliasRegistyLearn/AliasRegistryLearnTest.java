@@ -1,4 +1,4 @@
-package com.example.demo.AliasRegistyLearn;
+package com.example.demo.aliasRegistyLearn;
 
 import com.example.demo.Annotation.TestAnno;
 import com.example.demo.bean.TestBean;
@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * @author maonengneng
  */
-public class AliasRegistryLearn {
+public class AliasRegistryLearnTest {
 
     DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
 
@@ -40,15 +40,15 @@ public class AliasRegistryLearn {
     @Test
     public void testDefaultSingletonBeanRegistry() {
         //DefaultSingletonBeanRegistry 方法测试 注册单例bean
-        factory.registerSingleton("bean1", new AliasRegistryLearn());
+        factory.registerSingleton("bean1", new AliasRegistryLearnTest());
         Object abc = factory.getBean("bean1");
         System.out.println("abc = " + abc);
         //只会返回已经实例化的bean名称
         String[] singletonNames = factory.getSingletonNames();
         System.out.println("singletonNames = " + Arrays.toString(singletonNames));
         //获取bean的提供者，类似于Optional可以延迟使用这个bean，支持stream
-        ObjectProvider<AliasRegistryLearn> provider = factory.getBeanProvider(AliasRegistryLearn.class);
-        AliasRegistryLearn ifAvailable = provider.getIfAvailable();
+        ObjectProvider<AliasRegistryLearnTest> provider = factory.getBeanProvider(AliasRegistryLearnTest.class);
+        AliasRegistryLearnTest ifAvailable = provider.getIfAvailable();
         System.out.println("ifAvailable = " + ifAvailable);
         System.out.println("provider = " + provider);
         System.out.println(factory);
@@ -95,7 +95,7 @@ public class AliasRegistryLearn {
     @Test
     public void testConfigurableBeanFactory() {
         //设置类加载器
-        factory.setBeanClassLoader(AliasRegistryLearn.class.getClassLoader());
+        factory.setBeanClassLoader(AliasRegistryLearnTest.class.getClassLoader());
         //设置解析器，多个解析器会顺序解析
         StringValueResolver resolver = strVal -> strVal + "----resolver";
         factory.addEmbeddedValueResolver(resolver);

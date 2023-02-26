@@ -1,6 +1,7 @@
 package com.example.demo.bean;
 
 import com.example.demo.Annotation.TestAnno;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * 测试bean
