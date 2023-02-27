@@ -1,6 +1,11 @@
 package com.example.demo.aliasRegistyLearn;
 
 import org.junit.Test;
+import org.junit.runner.notification.RunListener;
+
+import java.util.Collections;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 测试一些jdk特性
@@ -27,5 +32,15 @@ public class JdkTest {
         System.out.println(integer3 == integer4);
     }
 
+    /**
+     * 线程安全set的另一种获取方法
+     * 测试集合
+     * #ThreadSafe
+     */
+    @Test
+    public void testCollections(){
+        Set<String> set = Collections.newSetFromMap(new ConcurrentHashMap<>());
+
+    }
 
 }

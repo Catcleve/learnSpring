@@ -1,6 +1,7 @@
 package com.example.demo.aliasRegistyLearn;
 
 import com.example.demo.Annotation.TestAnno;
+import com.example.demo.bean.TestAutoWirBean;
 import com.example.demo.bean.TestBean;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.config.NamedBeanHolder;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
@@ -19,9 +21,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * DefaultListableBeanFactory类及其父类学习
  * @author maonengneng
  */
-public class AliasRegistryLearnTest {
+public class DefaultListableBeanFactoryTest {
 
     DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
 
@@ -40,15 +43,15 @@ public class AliasRegistryLearnTest {
     @Test
     public void testDefaultSingletonBeanRegistry() {
         //DefaultSingletonBeanRegistry 方法测试 注册单例bean
-        factory.registerSingleton("bean1", new AliasRegistryLearnTest());
+        factory.registerSingleton("bean1", new DefaultListableBeanFactoryTest());
         Object abc = factory.getBean("bean1");
         System.out.println("abc = " + abc);
         //只会返回已经实例化的bean名称
         String[] singletonNames = factory.getSingletonNames();
         System.out.println("singletonNames = " + Arrays.toString(singletonNames));
         //获取bean的提供者，类似于Optional可以延迟使用这个bean，支持stream
-        ObjectProvider<AliasRegistryLearnTest> provider = factory.getBeanProvider(AliasRegistryLearnTest.class);
-        AliasRegistryLearnTest ifAvailable = provider.getIfAvailable();
+        ObjectProvider<DefaultListableBeanFactoryTest> provider = factory.getBeanProvider(DefaultListableBeanFactoryTest.class);
+        DefaultListableBeanFactoryTest ifAvailable = provider.getIfAvailable();
         System.out.println("ifAvailable = " + ifAvailable);
         System.out.println("provider = " + provider);
         System.out.println(factory);
@@ -70,7 +73,7 @@ public class AliasRegistryLearnTest {
         RootBeanDefinition beanDefinition = new RootBeanDefinition();
         beanDefinition.setBeanClass(TestBean.class);
         MutablePropertyValues propertyValues = new MutablePropertyValues();
-        HashMap<String, String> propertyMap = new HashMap<>(2);
+        Map<String, String> propertyMap = new HashMap<>(2);
         propertyMap.put("property1", "123");
         propertyMap.put("property2", "456");
         propertyValues.addPropertyValues(propertyMap);
@@ -95,7 +98,7 @@ public class AliasRegistryLearnTest {
     @Test
     public void testConfigurableBeanFactory() {
         //设置类加载器
-        factory.setBeanClassLoader(AliasRegistryLearnTest.class.getClassLoader());
+        factory.setBeanClassLoader(DefaultListableBeanFactoryTest.class.getClassLoader());
         //设置解析器，多个解析器会顺序解析
         StringValueResolver resolver = strVal -> strVal + "----resolver";
         factory.addEmbeddedValueResolver(resolver);
@@ -166,15 +169,52 @@ public class AliasRegistryLearnTest {
         System.out.println(factory.getBeansOfType(TestBean.class));
     }
 
-/*    @Test
-    public void testAlias (){
+    /**
+     * 测试自动装配能力bean工厂
+     * 初始化bean
+     * 前置和后置处理器{@link #testConfigurableBeanFactory()}
+     * 以及一些其他看不懂的玩意
+     */
+    @Test
+    public void testAutowireCapableBeanFactory (){
+        testBeanDefinitionRegistry();
+        TestBean bean = factory.createBean(TestBean.class);
+        System.out.println("bean = " + bean);
+        factory.autowireBean(bean);
+        System.out.println("bean = " + bean);
+        factory.configureBean(bean, "bean2");
+        System.out.println("bean = " + bean);
+        Object bean1 = factory.createBean(TestBean.class, 1, false);
+        System.out.println("bean1 = " + bean1);
+        NamedBeanHolder<TestBean> beanHolder = factory.resolveNamedBean(TestBean.class);
+        System.out.println("beanHolder = " + beanHolder.getBeanName() + "=" + beanHolder.getBeanInstance());
+    }
+
+
+    /**
+     * 抽象自动装配能力bean工厂测试
+     * {@link #testAutowireCapableBeanFactory()}
+     * {@link #testAbstractBeanFactory()}
+     * 这俩合体了
+     */
+    @Test
+    public void testAbstractAutowireCapableBeanFactory (){
+
 
     }
 
+
+    /**
+     * 测试配置有助于bean工厂
+     * beanFactory配置清单，忽略类型和接口，冻结bean，创建所有非懒加载bean
+     */
     @Test
-    public void testAlias (){
+    public void testConfigurableListableBeanFactory (){
+        factory.createBean(TestAutoWirBean.class);
+        testBeanDefinitionRegistry();
+        //忽略自动装配的类型，可能是后面自动注入用的？暂时没办法测试自动装配
+        factory.ignoreDependencyType(TestAutoWirBean.class);
 
-    }*/
-
+    }
 
 }

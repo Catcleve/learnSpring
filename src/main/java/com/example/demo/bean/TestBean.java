@@ -1,7 +1,10 @@
 package com.example.demo.bean;
 
 import com.example.demo.Annotation.TestAnno;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import javax.annotation.Resource;
 
 /**
  * 测试bean
@@ -11,6 +14,9 @@ import org.springframework.beans.factory.annotation.Value;
  */
 @TestAnno("testBean")
 public class TestBean {
+
+    @Autowired
+    private TestAutoWirBean autoWirBean;
 
     private String property1;
 
@@ -35,7 +41,8 @@ public class TestBean {
     @Override
     public String toString() {
         return "TestBean{" +
-                "property1='" + property1 + '\'' +
+                "autoWirBean=" + autoWirBean +
+                ", property1='" + property1 + '\'' +
                 ", property2='" + property2 + '\'' +
                 '}';
     }
