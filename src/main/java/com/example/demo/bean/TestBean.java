@@ -15,12 +15,20 @@ import javax.annotation.Resource;
 @TestAnno("testBean")
 public class TestBean {
 
-    @Autowired
+
     private TestAutoWirBean autoWirBean;
 
     private String property1;
 
     private String property2;
+
+    public TestAutoWirBean getAutoWirBean() {
+        return autoWirBean;
+    }
+
+    public void setAutoWirBean(TestAutoWirBean autoWirBean) {
+        this.autoWirBean = autoWirBean;
+    }
 
     public String getProperty1() {
         return property1;

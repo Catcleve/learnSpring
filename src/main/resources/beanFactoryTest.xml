@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="a" class="com.example.demo.bean.TestBean">
+        <property name="property1" value="测试1" />
+        <property name="property2" value="测试2" />
+        <property name="autoWirBean" ref="a1" />
+
+    </bean>
+
+    <bean id="a1" class="com.example.demo.bean.TestAutoWirBean">
+    </bean>
+</beans>
