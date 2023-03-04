@@ -3,6 +3,7 @@ package com.example.demo.bean;
 import com.example.demo.Annotation.TestAnno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
@@ -13,9 +14,11 @@ import javax.annotation.Resource;
  * @date 2023/02/25
  */
 @TestAnno("testBean")
+@Component("321")
 public class TestBean {
 
 
+    @Resource(name = "123")
     private TestAutoWirBean autoWirBean;
 
     private String property1;

@@ -1,6 +1,5 @@
 package com.example.demo.bean;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -14,8 +13,9 @@ import org.springframework.stereotype.Component;
  * 如果配置文件没有指定环境 但是使用了此注解指定了环境，则加载不到此beanTestAutoWirBean
  */
 
+@Profile("dev")
 @Component("123")
-public class TestAutoWirBean {
+public class TestAutoWirBean1 extends TestAutoWirBean{
 
     private TestBean testBean;
 }
