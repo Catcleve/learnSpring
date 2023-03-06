@@ -1,20 +1,23 @@
 package com.example.demo.aliasRegistyLearn;
 
 import org.junit.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
+import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
-import org.springframework.beans.factory.xml.DefaultDocumentLoader;
-import org.springframework.beans.factory.xml.DocumentLoader;
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.beans.factory.xml.XmlBeanFactory;
+import org.springframework.beans.factory.xml.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.util.StringUtils;
 import org.springframework.util.xml.SimpleSaxErrorHandler;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 
@@ -40,6 +43,9 @@ public class XmlBeanDefinitionReaderTest {
 
         private ErrorHandler errorHandler = new SimpleSaxErrorHandler(logger);
 
+        private Class<? extends BeanDefinitionDocumentReader> documentReaderClass =
+                DefaultBeanDefinitionDocumentReader.class;
+
         /**
          * Create new XmlBeanDefinitionReader for the given bean factory.
          *
@@ -62,6 +68,12 @@ public class XmlBeanDefinitionReaderTest {
             return this.documentLoader.loadDocument(inputSource, getEntityResolver(), this.errorHandler,
                     getValidationModeForResource(resource), isNamespaceAware());
         }
+
+        @Override
+        public BeanDefinitionDocumentReader createBeanDefinitionDocumentReader() {
+            return BeanUtils.instantiateClass(this.documentReaderClass);
+        }
+
 
     }
 
@@ -147,22 +159,57 @@ public class XmlBeanDefinitionReaderTest {
         Element documentElement = document.getDocumentElement();
         System.out.println("documentElement = " + documentElement);
         System.out.println("document = " + document);
+
+        XmlReaderContext readerContext = reader.createReaderContext(resource);
+
+        BeanDefinitionParserDelegate delegate = new BeanDefinitionParserDelegate(readerContext);
+        delegate.initDefaults(documentElement, null);
+
+        NodeList nl = documentElement.getChildNodes();
+        for (int i = 0; i < nl.getLength(); i++) {
+            Node node = nl.item(i);
+            if (node instanceof Element) {
+                Element ele = (Element) node;
+                System.out.println(ele.getAttribute("id"));
+                //解析bean了，基本上全部解析出来了
+                BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele);
+                assert bdHolder != null;
+                //自定义属性解析
+                BeanDefinitionHolder beanDefinitionHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder);
+                //注册bean
+                BeanDefinitionRegistry registry = readerContext.getRegistry();
+                BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder,registry);
+            }
+        }
         reader.registerBeanDefinitions(document, new ClassPathResource("beanFactoryTest.xml"));
     }
 
+
+    @Test
+    public void testRegisterBeanDefinitions () throws Exception {
+        Document document = reader.doLoadDocument(new InputSource(new ClassPathResource("beanFactoryTest.xml").getInputStream()), new ClassPathResource("beanFactoryTest.xml"));
+        BeanDefinitionDocumentReader documentReader = reader.createBeanDefinitionDocumentReader();
+        documentReader.registerBeanDefinitions(document, reader.createReaderContext(resource));
+
+
+    }
+
+    @Test
+    public void testStringUtils (){
+        String[] strings = StringUtils.tokenizeToStringArray("123,11; 14 123,,", ",;",false,false);
+        for (String string : strings) {
+            System.out.println("string = " + string);
+        }
+
+        System.out.println("-----------------");
+
+        String[] zxcvs = StringUtils.delimitedListToStringArray("12x321v137z281c973", "321", "zxcv");
+        for (String zxcv : zxcvs) {
+            System.out.println("zxcv = " + zxcv);
+        }
+
+    }
 /*
-    @Test
-    public void test (){
-
-
-    }
-
-    @Test
-    public void test (){
-
-
-    }
-
     @Test
     public void test (){
 

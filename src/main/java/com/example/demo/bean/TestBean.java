@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @date 2023/02/25
  */
 @TestAnno("testBean")
-@Component("321")
+//@Component("321")
 public class TestBean {
 
 
