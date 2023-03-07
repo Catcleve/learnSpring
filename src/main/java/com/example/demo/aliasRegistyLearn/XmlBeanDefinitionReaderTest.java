@@ -6,6 +6,7 @@ import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.xml.*;
@@ -209,13 +210,32 @@ public class XmlBeanDefinitionReaderTest {
         }
 
     }
-/*
+
     @Test
-    public void test (){
+    public void test () throws Exception {
+        Document document = reader.doLoadDocument(new InputSource(new ClassPathResource("beanFactoryTest.xml").getInputStream()), new ClassPathResource("beanFactoryTest.xml"));
+        Element documentElement = document.getDocumentElement();
+        XmlReaderContext readerContext = reader.createReaderContext(resource);
+
+        BeanDefinitionParserDelegate delegate = new BeanDefinitionParserDelegate(readerContext);
+        delegate.initDefaults(documentElement, null);
+        NodeList nl = documentElement.getChildNodes();
+        for (int i = 0; i < nl.getLength(); i++) {
+            Node node = nl.item(i);
+            if (node instanceof Element) {
+                Element ele = (Element) node;
+                String className = ele.getAttribute("className");
+                //解析bean  创建beanDefinition
+                AbstractBeanDefinition beanDefinition = delegate.parseBeanDefinitionElement(ele, className, null);
+                //上面方法中获取beanDefinition的方法
+                AbstractBeanDefinition beanDefinition1 = BeanDefinitionReaderUtils.createBeanDefinition(null, null, null);
+
+            }
+        }
 
 
     }
-
+/*
     @Test
     public void test (){
 
