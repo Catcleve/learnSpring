@@ -1,5 +1,8 @@
 package com.example.demo.test.lookup;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Teacher extends User{
 
     @Override

@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>lookup</module>
+        <module>replaceMethod</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -45,6 +46,12 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>lookup</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

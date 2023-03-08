@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.test.lookup.GetBeanTest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -9,8 +10,8 @@ public class DemoApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
-        Object bean = context.getBean("321");
-        System.out.println("bean = " + bean);
+        GetBeanTest bean = (GetBeanTest)context.getBean("getBeanTest");
+        bean.showMe();
     }
 
 }
