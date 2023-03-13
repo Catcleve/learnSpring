@@ -6,6 +6,7 @@
     <modules>
         <module>lookup</module>
         <module>replaceMethod</module>
+        <module>volatile</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
