@@ -179,7 +179,8 @@ public class XmlBeanDefinitionReaderTest {
                 BeanDefinitionHolder beanDefinitionHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder);
                 //注册bean
                 BeanDefinitionRegistry registry = readerContext.getRegistry();
-                BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder,registry);
+                //把beanDefinition 注册到 registry中 验证加放到map中，通过名字和beanDefinition对象
+                BeanDefinitionReaderUtils.registerBeanDefinition(beanDefinitionHolder,registry);
             }
         }
         reader.registerBeanDefinitions(document, new ClassPathResource("beanFactoryTest.xml"));
