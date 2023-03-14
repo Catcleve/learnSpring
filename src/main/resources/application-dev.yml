@@ -1,7 +1,0 @@
-server:
-  port: 8099
-
-#  此配置配合 @profile注解，可以实现按照环境加载不同的bean
-spring:
-  profiles:
-    active: dev
