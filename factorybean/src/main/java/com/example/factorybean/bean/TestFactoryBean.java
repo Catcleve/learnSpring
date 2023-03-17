@@ -16,7 +16,15 @@ import org.springframework.stereotype.Component;
 public class TestFactoryBean implements FactoryBean<TestBean> {
 
 
-    @Value("${factory.bean.propertyString}")
+    public String getPropertyString() {
+        return propertyString;
+    }
+
+    public void setPropertyString(String propertyString) {
+        this.propertyString = propertyString;
+    }
+
+
     private String propertyString;
 
     @Override

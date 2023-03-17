@@ -10,7 +10,7 @@ public class FactorybeanApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(FactorybeanApplication.class, args);
-        TestBean bean = (TestBean)run.getBean("testFactoryBean");
+        TestBean bean = (TestBean)run.getBean("fac");
         System.out.println("bean = " + bean);
     }
 
