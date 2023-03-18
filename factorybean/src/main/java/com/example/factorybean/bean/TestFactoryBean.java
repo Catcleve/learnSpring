@@ -43,7 +43,7 @@ public class TestFactoryBean implements FactoryBean<TestBean> {
 
     @Override
     public boolean isSingleton() {
-        return true;
+        return false;
     }
 
 

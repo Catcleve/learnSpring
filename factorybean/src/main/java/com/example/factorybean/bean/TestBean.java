@@ -1,6 +1,7 @@
 package com.example.factorybean.bean;
 
 
+import org.springframework.stereotype.Component;
 
 /**
  * 测试bean
@@ -8,6 +9,7 @@ package com.example.factorybean.bean;
  * @author maonengneng
  * @date 2023/02/25
  */
+@Component
 public class TestBean {
 
 

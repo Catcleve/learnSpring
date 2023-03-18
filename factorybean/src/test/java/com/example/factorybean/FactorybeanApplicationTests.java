@@ -22,14 +22,20 @@ class FactorybeanApplicationTests {
      */
     @Test
     void getBeanTest() throws Exception {
-        Object fac = applicationContext.getBean("fac");
-        System.out.println("fac = " + fac);
+        //Object fac = applicationContext.getBean("fac");
+        //System.out.println("fac = " + fac);
+        //
+        //FactoryBean<?> bean = (FactoryBean<?>) applicationContext.getBean("&fac");
+        //TestBean object = (TestBean)bean.getObject();
+        //System.out.println(bean.getObjectType());
+        //System.out.println(fac == object);
+        //System.out.println(System.identityHashCode(fac));
 
-        FactoryBean<?> bean = (FactoryBean<?>) applicationContext.getBean("&fac");
-        TestBean object = (TestBean)bean.getObject();
-        System.out.println(bean.getObjectType());
-        System.out.println(fac == object);
-        System.out.println(System.identityHashCode(fac));
+
+        Object testBean = applicationContext.getBean("testBean");
+        System.out.println("testBean = " + testBean);
+
+
     }
 
 }
