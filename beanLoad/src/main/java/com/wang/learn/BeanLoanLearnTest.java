@@ -150,4 +150,20 @@ public class BeanLoanLearnTest {
 
     }
 
+    /**
+     * 测试创建bean
+     * 接下来调用AbstractAutowireCapableBeanFactory.populateBean进行属性解析和注入
+     * 然后调用 initializeBean 来执行Aware相关的接口，初始化方法
+     * 执行postProcessBeforeInitialization初始化前处理器
+     * 执行invokeInitMethods执行自定义的初始化方法（这里面会先执行afterPropertiesSet方法再执行 init方法）
+     * 执行postProcessAfterInitialization 初始化后处理器
+     * 至此bean加载完成
+     */
+    @Test
+    public void testCreateBeanInstance1(){
+
+
+    }
+
+
 }

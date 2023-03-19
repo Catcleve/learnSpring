@@ -1,6 +1,8 @@
 package com.example.factorybean.bean;
 
 
+import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,13 +12,14 @@ import org.springframework.stereotype.Component;
  * @date 2023/02/25
  */
 @Component
-public class TestBean {
+public class TestBean implements BeanNameAware {
 
 
 
-
+    @Value("value1")
     private String property1;
 
+    @Value("value2")
     private String property2;
 
 
@@ -42,5 +45,10 @@ public class TestBean {
                 "property1='" + property1 + '\'' +
                 ", property2='" + property2 + '\'' +
                 '}';
+    }
+
+    @Override
+    public void setBeanName(String name) {
+        System.out.println("BeanNameAware接口设置了beanName为：" + name);
     }
 }

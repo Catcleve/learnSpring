@@ -15,7 +15,7 @@ import java.beans.PropertyDescriptor;
  * 各种前置和后置处理器
  * 执行顺序为
  * 实例化前操作 可以替换bean为任意类型
- * 实例化后操作 只能修改属性
+ * 实例化后操作 在属性填充方法之前 只能修改属性 如果返回false，那么后面所有的加载属性的操作都停止
  * 初始化前操作 可以替换bean为任意类型
  * 初始化后操作 可以替换bean为任意类型
  * myaaa
@@ -47,6 +47,15 @@ public class Myaaa implements InstantiationAwareBeanPostProcessor {
         return InstantiationAwareBeanPostProcessor.super.postProcessBeforeInstantiation(beanClass, beanName);
     }
 
+    /**
+     * 实例化之后要执行的是属性填充操作
+     * 如果这个方法返回false，则会中断后面的属性填充操作~~
+     *
+     * @param bean     豆
+     * @param beanName bean名字
+     * @return boolean
+     * @throws BeansException 豆子例外
+     */
     @Override
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
         if ("testBean".equals(beanName)) {
@@ -73,7 +82,7 @@ public class Myaaa implements InstantiationAwareBeanPostProcessor {
             System.out.println("原本bean的hash为："+System.identityHashCode(bean));
             TestBean testBean = new TestBean();
             testBean.setProperty2("123");
-            return testBean;
+            //return testBean;
         }
         return InstantiationAwareBeanPostProcessor.super.postProcessBeforeInitialization(bean, beanName);
     }
