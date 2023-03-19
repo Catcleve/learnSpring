@@ -134,4 +134,20 @@ public class BeanLoanLearnTest {
 
 
     }
+
+    /**
+     * 测试创建bean实例
+     * 调用流程 getBean--doGetBean--缓存中没有--getSingleton--singletonFactory.getObject()--doCreateBean--
+     * createBeanInstance   通过RootBeanDefinition创建一个 BeanWrapper出来
+     * autowireConstructor 使用给定的构造函数创建BeanWrapper  这个方法很长，就是通过给定的参数找到匹配的构造函数然后实例化
+     * instantiateBean 使用默认的构造方法创建BeanWrapper
+     * wrapper创建成功之后，对 BeanDefinition 进行后置处理(不知道干啥的)
+     * 如果符合条件，提前暴露ObjectFactory 来解决循环依赖问题
+     */
+    @Test
+    public void testCreateBeanInstance(){
+
+
+    }
+
 }
