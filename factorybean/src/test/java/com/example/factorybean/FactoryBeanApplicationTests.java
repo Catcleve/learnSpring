@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootTest
-class FactorybeanApplicationTests {
+class FactoryBeanApplicationTests {
 
     @Autowired
     ApplicationContext applicationContext;

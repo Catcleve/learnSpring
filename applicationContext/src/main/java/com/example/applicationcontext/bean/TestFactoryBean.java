@@ -1,4 +1,4 @@
-package com.example.factorybean.bean;
+package com.example.applicationcontext.bean;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,24 +11,16 @@ import org.springframework.stereotype.Component;
  * @author maonengneng
  * @date 2023/03/14
  */
-@Component("fac")
+@Component
 @ConfigurationProperties(prefix = "factory.bean")
 public class TestFactoryBean implements FactoryBean<TestBean> {
 
 
-    public String getPropertyString() {
-        return propertyString;
-    }
-
-    public void setPropertyString(String propertyString) {
-        this.propertyString = propertyString;
-    }
-
-
+    @Value("${factory.bean.propertyString}")
     private String propertyString;
 
     @Override
-    public TestBean getObject() {
+    public TestBean getObject() throws Exception {
         TestBean testBean = new TestBean();
         String[] split = propertyString.split(",");
         testBean.setProperty1(split[0]);
@@ -43,7 +35,7 @@ public class TestFactoryBean implements FactoryBean<TestBean> {
 
     @Override
     public boolean isSingleton() {
-        return false;
+        return true;
     }
 
 
