@@ -8,6 +8,7 @@
         <module>replaceMethod</module>
         <module>volatile</module>
         <module>beanLoad</module>
+        <module>threadlocal</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
