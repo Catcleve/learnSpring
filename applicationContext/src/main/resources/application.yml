@@ -1,0 +1,6 @@
+server:
+  port: 8099
+
+factory:
+  bean:
+    propertyString: 123,4561
