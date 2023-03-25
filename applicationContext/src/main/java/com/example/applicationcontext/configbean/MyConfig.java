@@ -2,12 +2,17 @@ package com.example.applicationcontext.configbean;
 
 import com.example.applicationcontext.convert.DatePropertyEditor;
 import org.springframework.beans.PropertyEditorRegistrar;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.CustomEditorConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MyConfig {
+
+
 
     /**
      * 自定义编辑器配置
@@ -24,4 +29,15 @@ public class MyConfig {
         });
         return editorConfigurer;
     }
+
+    @Bean
+    public BeanFactoryPostProcessor myBeanFactoryPostProcess(@Value("#{'${bean.factory.replaceFiles}'.split(',')}") String[] replace){
+        return new MyBeanFactoryPostProcess(replace);
+    }
+
+    @Bean
+    public BeanPostProcessor myBeanPostProcessor(){
+        return new MyBeanPostProcessor();
+    }
+
 }

@@ -1,8 +1,11 @@
 package com.example.applicationcontext.learn;
 
+import com.example.applicationcontext.bean.TestBean;
+import com.example.applicationcontext.configbean.MyBeanFactoryPostProcess;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.ClassPathResource;
 
 /**
  * applicationContext从xml加载bean
@@ -31,6 +34,14 @@ public class LoadFromXml {
     public void testRefresh(){
         //准备环境变量，系统配置，检测等
         //ac.prepareRefresh();
+    }
+
+    @Test
+    public void testBeanFactoryProcessor(){
+        XmlBeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("beanFactoryTest.xml"));
+        MyBeanFactoryPostProcess beanFactoryPostProcess = new MyBeanFactoryPostProcess("1232");
+        beanFactoryPostProcess.postProcessBeanFactory(beanFactory);
+        System.out.println(beanFactory.getBean(TestBean.class));
     }
 
 }

@@ -3,4 +3,11 @@ server:
 
 factory:
   bean:
-    propertyString: 123,4561
+    propertyString: 123,4561,1232
+
+bean:
+  factory:
+    replaceFiles: 123,password,hello
+
+test:
+  password: password

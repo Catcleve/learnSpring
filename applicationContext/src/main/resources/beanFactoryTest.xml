@@ -5,7 +5,7 @@
         <bean id="a" class="com.example.applicationcontext.bean.TestBean" name="a">
             <property name="property1" value="测试1" />
             <property name="property2" value="测试2" />
-
+            <property name="password" value="1232"/>
         </bean>
 
 
