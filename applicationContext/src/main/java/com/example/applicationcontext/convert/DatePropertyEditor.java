@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
