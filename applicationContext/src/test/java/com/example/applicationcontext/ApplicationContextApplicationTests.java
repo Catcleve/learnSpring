@@ -1,5 +1,6 @@
 package com.example.applicationcontext;
 
+import com.example.applicationcontext.aop.service.TestServiceBean;
 import com.example.applicationcontext.bean.TestAware;
 import com.example.applicationcontext.bean.TestBean;
 import com.example.applicationcontext.bean.TestBeanFactoryProcessor;
@@ -17,7 +18,7 @@ class ApplicationContextApplicationTests {
 
     @Autowired
     private ApplicationContext applicationContext;
-    
+
     @Test
     void contextLoads() {
 
@@ -29,16 +30,22 @@ class ApplicationContextApplicationTests {
     }
 
     @Test
-    void TestAware(){
+    void TestAware() {
         TestAware testAware = applicationContext.getBean(TestAware.class);
         System.out.println("testAware = " + testAware);
 
     }
 
     @Test
-    void TestBeanFactoryPostProcessor(){
+    void TestBeanFactoryPostProcessor() {
         TestBeanFactoryProcessor bean = applicationContext.getBean(TestBeanFactoryProcessor.class);
         System.out.println("bean = " + bean);
-
     }
+
+    @Test
+    void TestAop() {
+        TestServiceBean bean = (TestServiceBean) applicationContext.getBean("testServiceBean");
+        bean.test();
+    }
+
 }
