@@ -1,6 +1,5 @@
 package com.example.applicationcontext.configbean;
 
-import com.example.applicationcontext.convert.DatePropertyEditor;
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;

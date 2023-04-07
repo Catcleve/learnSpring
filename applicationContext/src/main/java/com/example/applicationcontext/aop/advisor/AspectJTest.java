@@ -3,13 +3,14 @@ package com.example.applicationcontext.aop.advisor;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 public class AspectJTest {
 
-    @Pointcut("execution(* com.example.applicationcontext.aop.service.*.test(..))")
+    @Pointcut("execution(* com.example.applicationcontext.aop.service.*.*.test(..))")
     public void test() {
 
     }
@@ -24,7 +25,7 @@ public class AspectJTest {
         System.out.println("after原方法");
     }
 
-    @Around("test()")
+    //@Around("test()")
     public Object aroundTest(ProceedingJoinPoint joinPoint) {
         try {
             System.out.println("aroundBefore原方法");

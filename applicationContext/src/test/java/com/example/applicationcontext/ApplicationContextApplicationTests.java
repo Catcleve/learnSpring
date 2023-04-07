@@ -1,8 +1,7 @@
 package com.example.applicationcontext;
 
-import com.example.applicationcontext.aop.service.TestServiceBean;
+import com.example.applicationcontext.aop.service.impl.TestServiceBean;
 import com.example.applicationcontext.bean.TestAware;
-import com.example.applicationcontext.bean.TestBean;
 import com.example.applicationcontext.bean.TestBeanFactoryProcessor;
 import com.example.applicationcontext.bean.TestDateValueBean;
 import org.junit.jupiter.api.Test;
@@ -46,6 +45,7 @@ class ApplicationContextApplicationTests {
     void TestAop() {
         TestServiceBean bean = (TestServiceBean) applicationContext.getBean("testServiceBean");
         bean.test();
+        System.out.println(bean.getClass().getSuperclass());
     }
 
 }

@@ -4,12 +4,14 @@ import com.example.applicationcontext.event.TestEvent;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
 @SpringBootApplication
+@EnableAspectJAutoProxy(exposeProxy = true)
 public class ApplicationContextApplication {
 
     public static void main(String[] args) {
