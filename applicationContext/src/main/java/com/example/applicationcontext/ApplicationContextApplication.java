@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 
 @SpringBootApplication
-@EnableAspectJAutoProxy(exposeProxy = true)
+@EnableAspectJAutoProxy(exposeProxy = true,proxyTargetClass = false)
 public class ApplicationContextApplication {
 
     public static void main(String[] args) {

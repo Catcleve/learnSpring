@@ -9,8 +9,8 @@ public class TestServiceBean implements ITestServiceBean {
 
 
     public void test() {
-        System.out.println(AopContext.currentProxy().getClass().getSuperclass());
         System.out.println("原方法");
+        System.out.println(AopContext.currentProxy().getClass().getSuperclass());
     }
 
 

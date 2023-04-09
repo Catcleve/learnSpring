@@ -11,3 +11,9 @@ bean:
 
 test:
   password: password
+
+
+spring:
+  aop:
+#    auto: false
+#    proxy-target-class: false
