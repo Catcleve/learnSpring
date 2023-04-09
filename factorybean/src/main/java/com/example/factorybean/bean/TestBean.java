@@ -1,6 +1,9 @@
 package com.example.factorybean.bean;
 
 
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -12,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @date 2023/02/25
  */
 @Component
-public class TestBean implements BeanNameAware {
+public class TestBean implements BeanNameAware, BeanFactoryAware {
 
 
 
@@ -50,5 +53,10 @@ public class TestBean implements BeanNameAware {
     @Override
     public void setBeanName(String name) {
         System.out.println("BeanNameAware接口设置了beanName为：" + name);
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        System.out.println("BeanNameAware接口设置了beanFactory为：" + beanFactory);
     }
 }

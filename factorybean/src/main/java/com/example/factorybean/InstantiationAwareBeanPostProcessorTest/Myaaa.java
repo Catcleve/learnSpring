@@ -71,11 +71,6 @@ public class Myaaa implements InstantiationAwareBeanPostProcessor {
     }
 
     @Override
-    public PropertyValues postProcessPropertyValues(PropertyValues pvs, PropertyDescriptor[] pds, Object bean, String beanName) throws BeansException {
-        return InstantiationAwareBeanPostProcessor.super.postProcessPropertyValues(pvs, pds, bean, beanName);
-    }
-
-    @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         if ("testBean".equals(beanName)) {
             System.out.println("初始化前操作");
