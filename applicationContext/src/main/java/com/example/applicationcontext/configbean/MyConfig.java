@@ -34,7 +34,7 @@ public class MyConfig {
         return new MyBeanFactoryPostProcess(replace);
     }
 
-    @Bean
+    //@Bean
     public BeanPostProcessor myBeanPostProcessor(){
         return new MyBeanPostProcessor();
     }

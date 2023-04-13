@@ -69,6 +69,13 @@ class ApplicationContextApplicationTests {
         System.out.println(bean.getClass().getSuperclass());
     }
 
+    @Test
+    void TestAop1() {
+        ITestServiceBean bean = applicationContext.getBean(ITestServiceBean.class);
+        bean.test1();
+        System.out.println(bean.getClass().getSuperclass());
+    }
+
     /**
      * 测试配置类proxyBeanMethods属性
      * 当proxyBeanMethods为true（默认）时 结果为true 反之为false
