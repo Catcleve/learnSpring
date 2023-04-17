@@ -1,4 +1,4 @@
-package com.example.applicationcontext.proxy.service;
+package com.example.applicationcontext.jdkproxy.service;
 
 /**
  * 用户服务

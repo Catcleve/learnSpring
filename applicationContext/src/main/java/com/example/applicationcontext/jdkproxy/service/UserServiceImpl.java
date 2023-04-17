@@ -1,4 +1,4 @@
-package com.example.applicationcontext.proxy.service;
+package com.example.applicationcontext.jdkproxy.service;
 
 public class UserServiceImpl implements UserService {
 

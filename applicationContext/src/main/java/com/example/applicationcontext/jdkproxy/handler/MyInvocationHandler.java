@@ -1,4 +1,4 @@
-package com.example.applicationcontext.proxy.handler;
+package com.example.applicationcontext.jdkproxy.handler;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

@@ -1,8 +1,8 @@
-package com.example.applicationcontext.proxy;
+package com.example.applicationcontext.jdkproxy;
 
-import com.example.applicationcontext.proxy.handler.MyInvocationHandler;
-import com.example.applicationcontext.proxy.service.UserService;
-import com.example.applicationcontext.proxy.service.UserServiceImpl;
+import com.example.applicationcontext.jdkproxy.handler.MyInvocationHandler;
+import com.example.applicationcontext.jdkproxy.service.UserService;
+import com.example.applicationcontext.jdkproxy.service.UserServiceImpl;
 
 import java.util.Arrays;
 
