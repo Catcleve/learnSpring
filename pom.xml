@@ -11,6 +11,7 @@
         <module>threadlocal</module>
         <module>demo1</module>
         <module>mybatis</module>
+        <module>file</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
