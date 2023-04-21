@@ -1,14 +1,12 @@
 package com.example.dao;
 
 import com.example.dto.User;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-
+@Mapper
 public interface UserDao {
 
-    @Select("select * from user limit 10")
     List<User> listAll();
     int deleteByPrimaryKey(Integer id);
 

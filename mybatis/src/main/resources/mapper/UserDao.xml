@@ -73,6 +73,9 @@
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="listAll" resultType="com.example.dto.User">
+    select * from user;
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
     where id = #{id,jdbcType=INTEGER}
