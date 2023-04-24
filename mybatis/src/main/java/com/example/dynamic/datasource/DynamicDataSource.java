@@ -4,11 +4,13 @@ import com.example.dto.DataSourceConfig;
 import com.example.dynamic.context.DynamicDataSourceContextHolder;
 import com.google.gson.Gson;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import java.util.Map;
 
+@EqualsAndHashCode(callSuper = false)
 @Data
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
