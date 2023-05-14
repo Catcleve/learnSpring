@@ -1,0 +1,10 @@
+server:
+  port: 8091
+  servlet:
+    context-path: /kafka
+
+#    配置1表示有一个确认消费的才算成功
+spring:
+  kafka:
+    producer:
+      acks: -1
