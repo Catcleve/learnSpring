@@ -1,0 +1,3 @@
+#2.7版本为现在这么长的文件名，2.7之前是短的，可以百度
+#可以在主程序启动类上使用@Import注解来直接引入配置类，同样可以扫描到对应的bean
+com.spring.study.HelloServiceAutoConfiguration
