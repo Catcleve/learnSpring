@@ -1,14 +1,20 @@
 package com.example.applicationcontext.configbean;
 
+import com.example.applicationcontext.bean.TestBean;
+import com.example.applicationcontext.bean.TestConfigurationBean;
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.CustomEditorConfigurer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration(proxyBeanMethods = false)
+@Configuration(proxyBeanMethods = true)
+//如果这里设置为 false ，那么testConfigurationBean()和testConfigurationBean1()方法中的
+// testBean属性将会是两个不同的bean
+// 如果为true，那么会创建 MyConfig类的代理类 从而使testBean()方法返回的bean为单例池中的bean
 public class MyConfig {
 
 
@@ -37,6 +43,21 @@ public class MyConfig {
     //@Bean
     public BeanPostProcessor myBeanPostProcessor(){
         return new MyBeanPostProcessor();
+    }
+
+    @Bean
+    public TestConfigurationBean testConfigurationBean(){
+        return new TestConfigurationBean(testBean());
+    }
+
+    @Bean
+    public TestConfigurationBean testConfigurationBean1(){
+        return new TestConfigurationBean(testBean());
+    }
+
+    @Bean
+    public TestBean testBean(){
+        return new TestBean();
     }
 
 }

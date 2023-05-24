@@ -12,8 +12,6 @@ import javax.annotation.Resource;
  * @author maonengneng
  * @date 2023/02/25
  */
-@Data
-@ToString
 public class TestBean {
 
     private String property1;

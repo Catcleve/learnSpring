@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
  * @author maonengneng
  * @date 2023/03/14
  */
-@Component
-@ConfigurationProperties(prefix = "factory.bean")
+//@Component
+//@ConfigurationProperties(prefix = "factory.bean")
 @Setter
 public class TestFactoryBean implements FactoryBean<TestBean> {
 
@@ -24,8 +24,8 @@ public class TestFactoryBean implements FactoryBean<TestBean> {
     public TestBean getObject() throws Exception {
         TestBean testBean = new TestBean();
         String[] split = propertyString.split(",");
-        testBean.setProperty1(split[0]);
-        testBean.setProperty2(split[1]);
+        //testBean.setProperty1(split[0]);
+        //testBean.setProperty2(split[1]);
         return testBean;
     }
 
