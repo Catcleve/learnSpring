@@ -10,7 +10,9 @@ public abstract class GetBeanTest {
         this.getBean().showMe();
     }
 
-    @Lookup("1234")
-    public abstract User getBean();
+    @Lookup("teacher")
+    public User getBean(){
+        return null;
+    }
 
 }

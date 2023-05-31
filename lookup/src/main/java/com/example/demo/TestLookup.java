@@ -1,7 +1,11 @@
 package com.example.demo;
 
 import com.example.demo.test.lookup.GetBeanTest;
+import com.example.demo.test.lookup.User;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -14,13 +18,17 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author maonengneng
  * @date 2023/03/07
  */
+@SpringBootApplication
 public class TestLookup {
 
 
     public static void main(String[] args) {
-        ApplicationContext bf = new ClassPathXmlApplicationContext("TestLookup.xml");
-        GetBeanTest getBeanTest = (GetBeanTest)bf.getBean("getBeanTest");
-        getBeanTest.showMe();
+        ConfigurableApplicationContext run = SpringApplication.run(TestLookup.class);
+        User bean = run.getBean(GetBeanTest.class).getBean();
+        bean.showMe();
+        //ApplicationContext bf = new ClassPathXmlApplicationContext("TestLookup.xml");
+        //GetBeanTest getBeanTest = (GetBeanTest)bf.getBean("getBeanTest");
+        //getBeanTest.showMe();
     }
 
 }
