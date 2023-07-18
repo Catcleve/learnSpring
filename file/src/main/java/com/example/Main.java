@@ -2,16 +2,18 @@ package com.example;
 
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import net.sf.cglib.proxy.Enhancer;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
 
 import java.io.*;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Objects;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        sss();
+        proxy();
     }
 
     private static void extracted() {
@@ -54,6 +56,36 @@ public class Main {
             outputStream.write(files);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static void proxy(){
+        Animal target = new Animal();
+
+        // 创建代理对象
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(Animal.class);
+        enhancer.setCallback(new CustomMethodInterceptor());
+        Animal proxy = (Animal) enhancer.create();
+        target.setName("1123");
+        System.out.println("proxy = " + proxy);
+        // 使用代理对象调用方法
+        //proxy.method();
+    }
+
+    static class CustomMethodInterceptor implements MethodInterceptor {
+        @Override
+        public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
+            // 在方法执行前添加额外的行为
+            System.out.println("方法执行前");
+            System.out.println(method.getName());
+            // 调用目标方法
+            Object result = proxy.invokeSuper(obj, args);
+
+            // 在方法执行后添加额外的行为
+            System.out.println("方法执行后");
+
+            return result;
         }
     }
 }
